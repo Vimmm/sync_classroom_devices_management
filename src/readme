@@ -1,0 +1,131 @@
+管理员
+教学点信息：
+get /api/getallSchool
+response: [{
+    name: string
+    baseInfo: [{
+        location: string
+    }]
+    devicesInfo: [{
+        ...
+    }]
+}]
+
+post /api/addSchool
+request: {}
+response: [{
+    name: string
+    baseInfo: [{
+        location: string
+    }]
+    devicesInfo: [{
+        ...
+    }]
+}]
+
+post /api/saveSchool
+request : {}
+response: [{
+    name: string
+    baseInfo: [{
+        location: string
+    }]
+    devicesInfo: [{
+        ...
+    }]
+}]
+
+post /api/addDevice
+request: {}
+response: [{
+    name: string  
+    ...
+    
+}]
+
+post /api/saveDevice
+request : {}
+response: [{
+    name: string
+    ...
+}]
+
+维修员管理：
+get /api/getallRepairer
+note:需要查教学点表去更新维修员的教学点分配信息
+response: [{
+    name: string
+    baseInfo: [{
+        location: string
+    }]
+}]
+
+post /api/addRepairer
+note:需要查教学点表去更新维修员的教学点分配信息
+request: {},
+response:
+
+post /api/saveRepairer
+
+报表：
+note: 查询维修记录表   
+*****没做*****    get /api/get
+
+*****没做*****   问题手册：
+note:目前前端写死
+
+
+
+教学点界面：
+1.教学点信息：
+查询单个教学点信息：
+get  /api/getSchool
+request: {
+    登录账号
+}
+教学点信息修改接口，复用管理员的
+
+***没做***2.常见问题手册：写死
+
+3.申请报修
+post /api/applyRepair
+Ui修改：增加选择设备，
+Note: 
+request: {
+    学校ID,设备ID
+    申请文本，
+}
+
+4.状态显示
+note:缺一张页面，查询申请报修列表
+get /api/getSchoolRepairecord
+
+get /api/getRepairecord
+request: {
+    维修记录ID，
+}
+
+
+
+维修员:
+登陆：
+get /api/getUserinfo
+request: {
+    ID
+}
+post /api/saveUserinfo
+
+post /api/changeRecordstatus
+request: {
+    recordId,currentStatus, changedStatus
+}
+
+等待维修信息：
+get /api/getApplyrecords
+request: {
+    ID,
+}
+
+post /api/acceptApply
+
+post /api/alterApplystatus
