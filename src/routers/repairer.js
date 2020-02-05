@@ -1,5 +1,9 @@
 const {API_PREFIX} = require('../common/constants')
-const getUserinfo = require('../controller/school/getUserinfo') 
+const getUserinfo = require('../controller/repairer/getUserinfo') 
+const saveUserinfo = require('../controller/repairer/saveUserinfo') 
+const changeDevicestatus = require('../controller/repairer/changeDevicestatus') 
+const getApplyrecords = require('../controller/repairer/getApplyrecords') 
+const changerecordstatus = require('../controller/repairer/changerecordstatus') 
 
  
 module.exports = [{
@@ -8,5 +12,21 @@ module.exports = [{
         controller: getUserinfo,
         method: 'get',
         path: '/getUserinfo'
+    },{
+        controller: saveUserinfo,
+        method: 'post',
+        path: '/saveUserinfo'
+    },{
+        controller: changeDevicestatus,
+        method: 'post',
+        path: '/changeDevicestatus'
+    },{
+        controller: getApplyrecords,
+        method: 'get',
+        path: '/getApplyrecords'
+    },{
+        controller: changerecordstatus,
+        method: 'post',
+        path: '/changerecordstatus'
     }]
 }]

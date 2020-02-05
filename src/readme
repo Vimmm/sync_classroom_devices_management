@@ -90,7 +90,7 @@ request: {
 3.申请报修
 post /api/applyRepair
 Ui修改：增加选择设备，
-Note: 
+Note: 更改维修记录表，增加一条记录。
 request: {
     学校ID,设备ID
     申请文本，
@@ -115,17 +115,22 @@ request: {
 }
 post /api/saveUserinfo
 
-post /api/changeRecordstatus
+post /api/changeDevicestatus
 request: {
-    recordId,currentStatus, changedStatus
+    **deviceId,currentStatus, changedStatus**
+    deviceId, changedStatus
+}
+设备状态：0正常，1待维修，2报废
+
+
+get /api/getApplyrecords  获取所有申请信息
+request: {
+    repairerID, 查询维修记录表
 }
 
-等待维修信息：
-get /api/getApplyrecords
+post /api/changerecordstatus  修改记录表状态
 request: {
-    ID,
+    ID, 维修记录表ID,
+    changedStatus 修改后的状态
 }
-
-post /api/acceptApply
-
-post /api/alterApplystatus
+记录表状态：0等待受理（教学点发起申请，即生成一条记录，状态为0，修改create_time为发起时间），1接受申请， 2维修员到达， 3维修完成

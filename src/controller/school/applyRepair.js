@@ -11,7 +11,7 @@ module.exports = async (ctx) => {
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
     const {school, device, comment} = ctx.request.body
     const createTimeValue = Date.now()
-    const statusValue = 1
+    const statusValue = 0
     const getRepairSql = `select repairer from school where ID=${school}`
     const [{repairer}] = await exec(getRepairSql)
     console.log(repairer)
