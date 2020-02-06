@@ -7,7 +7,6 @@ module.exports = async (ctx) => {
     // 4. 数据包装，错误处理
     // 5. 赋值返回
     // const school = ctx.query.school
-    // console.log(school)
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
     const {address, tel, weixin, ID} = ctx.request.body
     const sql = `update user set address='${address}', tel='${tel}', weixin='${weixin}' where ID=${ID}`

@@ -1,4 +1,6 @@
 const {exec} = require('../../db')
+const SuccessModel = require('../../model/success')
+const ErrorModel = require('../../model/error')
 
 module.exports = async (ctx) => {
     // 1. 参数解析
@@ -8,9 +10,8 @@ module.exports = async (ctx) => {
     // 5. 赋值返回
     // const school = ctx.query.school
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
-    const {name, type, location, tel, ID} = ctx.request.body
-    const sql = `update school set name='${name}', type='${type}', location='${location}', tel='${tel}' where ID=${ID}`
+    const { ID } = ctx.query
+    const sql = `delete from devices where ID=${ID}`
     await exec(sql)
-    const responseDataSql = `select name,location,type,tel,ID,repairer from school where ID=${ID}`
-    ctx.body = await exec(responseDataSql)
+    ctx.body = 'ok'
 }

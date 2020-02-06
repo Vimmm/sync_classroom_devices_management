@@ -7,7 +7,6 @@ module.exports = async (ctx) => {
     // 4. 数据包装，错误处理
     // 5. 赋值返回
     const school = ctx.query.school
-    console.log(school)
     const sql = `select * from devices where school=${school}`
     const data = await exec(sql)
     // const data = '廖莎'

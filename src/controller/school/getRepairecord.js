@@ -7,9 +7,7 @@ module.exports = async (ctx) => {
     // 4. 数据包装，错误处理
     // 5. 赋值返回
     // const school = ctx.query.school
-    // console.log(school)
     const {cordId} = ctx.query
-    console.log(cordId)
     const sqlRecordetail = `select * from repair_records where ID=${cordId}`
     ctx.body = await exec(sqlRecordetail)
     

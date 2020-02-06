@@ -9,6 +9,10 @@ const saveDevice = require('../controller/admin/saveDevice')
 const getallRepairer = require('../controller/admin/getallRepairer')
 const addRepairer = require('../controller/admin/addRepairer')
 const saveRepairer = require('../controller/admin/saveRepairer')
+const removeDevice = require('../controller/admin/removeDevice')
+const removeSchool = require('../controller/admin/removeSchool')
+const removeRepairer = require('../controller/admin/removeRepairer')
+
 module.exports = [{
     prefix: `${API_PREFIX}`,
     routes: [{
@@ -43,5 +47,17 @@ module.exports = [{
         controller: saveRepairer,
         method: 'post',
         path: '/saveRepairer'
+    },{
+        controller: removeDevice,
+        method: 'get',
+        path: '/removeDevice'
+    },{
+        controller: removeSchool,
+        method: 'get',
+        path: '/removeSchool'
+    },{
+        controller: removeRepairer,
+        method: 'get',
+        path: '/removeRepairer'
     }]
 }]

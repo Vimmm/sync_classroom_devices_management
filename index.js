@@ -6,6 +6,9 @@ const RouterMapper = require('./src/core/Router')
 const admin = require('./src/routers/admin')
 const school = require('./src/routers/school')
 const repairer = require('./src/routers/repairer')
+const cors = require('@koa/cors')
+const ErrorModel = require('./src/model/error')
+const SuccessModel = require('./src/model/success')
 
 const koa = new Koa()
 
@@ -21,7 +24,17 @@ const routers = routerMapper.initRoutes()
 koa.proxy = true
 
 koa
+    .use(async (ctx, next) => {
+        try {
+            await next()
+            ctx.body = new SuccessModel(ctx.body)
+        }
+        catch (err) {
+            ctx.body = new ErrorModel(err.toString())
+        }
+    })
     .use(helmet())
+    .use(cors())
     .use(bodyParser())
     .use(routers())
     .listen(3000, () => {
