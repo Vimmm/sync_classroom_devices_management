@@ -17,6 +17,12 @@ module.exports = async (ctx) => {
         const updateSchoolSql = `update school set repairer=${data.insertId} where ID in (${schools.join(',')})`
         await exec(updateSchoolSql) 
     }
-    const insertDataSql = `select name, address, tel, weixin, role, account, password from user where ID=${data.insertId}`
+    const insertDataSql = `select * from user where ID=${data.insertId}`
+    const schoolsSql = `select * from school where repairer=${ID}`
+
     ctx.body = await exec(insertDataSql)
+        .then( users => users.map(async user => {
+            user.manaSchools = await exec(schoolsSql)
+            return user
+        }))
 }

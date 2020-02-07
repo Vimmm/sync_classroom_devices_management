@@ -14,16 +14,18 @@ module.exports = async (ctx) => {
 
     const sqlSchool = `select * from school where repairer=${user.ID}`
     const schools = await exec(sqlSchool)
-    
 
-    const schoolsInSql = schools.map(school => school.ID).join(',')
-    const sqlDevices = `select * from devices where school in (${schoolsInSql})`
-    // const statusSql = `select * from repair_records where school in (${schoolsInSql})`
-    const devices = await exec(sqlDevices)
-    
-    user.schools = schools.map(school => {
-        school.devices = devices.filter(device => device.school === school.ID)
-    })
+    if(Array.isArray(schools) && schools.length !== 0) {
+        const schoolsInSql = schools.map(school => school.ID).join(',')
+        const sqlDevices = `select * from devices where school in (${schoolsInSql})`
+        // const statusSql = `select * from repair_records where school in (${schoolsInSql})`
+        const devices = await exec(sqlDevices)
+        
+        user.schools = schools.map(school => {
+            school.allDevice = devices.filter(device => device.school === school.ID)
+            return school
+        })
+    }
 
     ctx.body = user
 }

@@ -8,9 +8,9 @@ module.exports = async (ctx) => {
     // 5. 赋值返回
     // const school = ctx.query.school
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
-    const {name, type, location, tel} = ctx.request.body
-    const sql = `insert into school (name, type, location, tel) values ('${name}', '${type}', '${location}', '${tel}')`
+    const {name, type, location, tel, account, passwords} = ctx.request.body
+    const sql = `insert into school (name, type, location, tel,account,passwords) values ('${name}', '${type}', '${location}', '${tel}','${account}', '${passwords}')`
     const data = await exec(sql)
-    const insertDataSql = `select name,location,type,tel,ID,repairer from school where ID=${data.insertId}`
+    const insertDataSql = `select * from school where ID=${data.insertId}`
     ctx.body = await exec(insertDataSql)
 }

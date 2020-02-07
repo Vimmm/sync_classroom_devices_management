@@ -20,7 +20,12 @@ module.exports = async (ctx) => {
         await exec(resetSchoolSql) 
         await exec(updateSchoolSql) 
     }
-    const responseDataSql = `select name, address, tel, weixin, role, account, password from user where ID=${ID}`
+    const responseDataSql = `select * from user where ID=${ID}`
+    const splSchool = `select * from school where repairer=${ID}`
     ctx.body = await exec(responseDataSql)
+        .then(users => users.map(async user => {
+            user.manaSchools = await exec(splSchool)
+            return user
+        }))
     
 }
