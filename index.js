@@ -7,8 +7,8 @@ const admin = require('./src/routers/admin')
 const school = require('./src/routers/school')
 const repairer = require('./src/routers/repairer')
 const cors = require('@koa/cors')
-const ErrorModel = require('./src/model/error')
-const SuccessModel = require('./src/model/success')
+const errHandler = require('./src/middleware/errHandler')
+const auth = require('./src/middleware/auth')
 
 const koa = new Koa()
 
@@ -24,15 +24,8 @@ const routers = routerMapper.initRoutes()
 koa.proxy = true
 
 koa
-    .use(async (ctx, next) => {
-        try {
-            await next()
-            ctx.body = new SuccessModel(ctx.body)
-        }
-        catch (err) {
-            ctx.body = new ErrorModel(err.toString())
-        }
-    })
+    .use(errHandler())
+    .use(auth())
     .use(helmet())
     .use(cors())
     .use(bodyParser())

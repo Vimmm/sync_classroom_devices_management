@@ -8,7 +8,8 @@ module.exports = async (ctx) => {
     // 5. 赋值返回
     // const school = ctx.query.school
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
-    const {school, device, comment} = ctx.request.body
+    const {device, comment} = ctx.request.body
+    const school = ctx.state.userId
     const createTimeValue = Date.now()
     const statusValue = 0
     const getRepairSql = `select repairer from school where ID=${school}`

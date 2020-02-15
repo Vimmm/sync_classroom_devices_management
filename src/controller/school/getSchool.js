@@ -7,7 +7,7 @@ module.exports = async (ctx) => {
     // 4. 数据包装，错误处理
     // 5. 赋值返回
     // const school = ctx.query.school
-    const {account} = ctx.query
+    const account = ctx.state.account
     
     const sqlSchool = `select * from school where account='${account}'`
     await exec(sqlSchool)
