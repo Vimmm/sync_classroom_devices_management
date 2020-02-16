@@ -21,14 +21,14 @@ module.exports = async (ctx) => {
         device_status
     } = ctx.request.body
     const sql = `update devices set name='${name}', 
-    device_number='${deviceNumber}', 
-    device_model='${deviceModel}', 
+    device_number='${device_number}', 
+    device_model='${device_model}', 
     type=${type},
-    product_time=${productTime},
-    start_time=${startTime},
-    end_time=${endTime},
+    product_time=${product_time},
+    start_time=${start_time},
+    end_time=${end_time},
     school=${school},
-    device_status=${deviceStatus}
+    device_status=${device_status}
     where ID=${ID}`
     await exec(sql)
     const responseDataSql = `select * from devices where ID=${ID}`

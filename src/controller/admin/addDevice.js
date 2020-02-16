@@ -10,17 +10,17 @@ module.exports = async (ctx) => {
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
     const {
         name,
-        deviceNumber, 
-        deviceModel, 
+        device_number, 
+        device_model, 
         type,
-        productTime,
-        startTime,
-        endTime,
+        product_time,
+        start_time,
+        end_time,
         school,
-        deviceStatus
+        device_status
     } = ctx.request.body
     const sql = `insert into devices (name, device_number, device_model, type, product_time, start_time, end_time, school, device_status) 
-        values ('${name}', '${deviceNumber}', '${deviceModel}', ${type}, ${productTime}, ${startTime}, ${endTime}, ${school}, ${deviceStatus})`
+        values ('${name}', '${device_number}', '${device_model}', ${type}, ${product_time}, ${start_time}, ${end_time}, ${school}, ${device_status})`
     const data = await exec(sql)
     const insertDataSql = `select * from devices where ID=${data.insertId}`
     ctx.body = await exec(insertDataSql)
