@@ -1,9 +1,9 @@
 const Koa = require('koa')
 const helmet = require('koa-helmet')
 const bodyParser = require('koa-bodyparser')
-const route = require('./src/routers')
 const RouterMapper = require('./src/core/Router')
 const admin = require('./src/routers/admin')
+const login = require('./src/routers/login')
 const school = require('./src/routers/school')
 const repairer = require('./src/routers/repairer')
 const cors = require('@koa/cors')
@@ -13,10 +13,10 @@ const auth = require('./src/middleware/auth')
 const koa = new Koa()
 
 const routerMapper = new RouterMapper([
-    ...route,
     ...admin,
     ...school,
     ...repairer,
+    ...login
 ])
 
 const routers = routerMapper.initRoutes()

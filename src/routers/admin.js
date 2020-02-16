@@ -1,4 +1,4 @@
-const {API_PREFIX} = require('../common/constants')
+const { ADMIN_PREFIX } = require('../common/constants')
 // const helloword = require('../controller/helloword')
 const login = require('../controller/admin/login')
 
@@ -16,7 +16,7 @@ const removeSchool = require('../controller/admin/removeSchool')
 const removeRepairer = require('../controller/admin/removeRepairer')
 
 module.exports = [{
-    prefix: `${API_PREFIX}`,
+    prefix: ADMIN_PREFIX,
     routes: [{
         controller: login,
         method: 'post',

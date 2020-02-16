@@ -11,14 +11,14 @@ module.exports = async (ctx) => {
     const {
         ID,
         name,
-        deviceNumber, 
-        deviceModel, 
+        device_number, 
+        device_model, 
         type,
-        productTime,
-        startTime,
-        endTime,
+        product_time,
+        start_time,
+        end_time,
         school,
-        deviceStatus
+        device_status
     } = ctx.request.body
     const sql = `update devices set name='${name}', 
     device_number='${deviceNumber}', 

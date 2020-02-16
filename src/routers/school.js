@@ -1,4 +1,4 @@
-const {API_PREFIX} = require('../common/constants')
+const { SCHOOL_PREFIX } = require('../common/constants')
 const getSchool = require('../controller/school/getSchool')
 const changeDevicestatus = require('../controller/school/changeDevicestatus') 
 
@@ -7,7 +7,7 @@ const getSchoolRepairecord = require('../controller/school/getSchoolRepairecord'
 const getRepairecord = require('../controller/school/getRepairecord') 
  
 module.exports = [{
-    prefix: `${API_PREFIX}`,
+    prefix: SCHOOL_PREFIX,
     routes: [{
         controller: getSchool,
         method: 'get',
