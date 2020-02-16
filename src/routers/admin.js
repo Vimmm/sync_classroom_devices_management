@@ -14,6 +14,8 @@ const saveRepairer = require('../controller/admin/saveRepairer')
 const removeDevice = require('../controller/admin/removeDevice')
 const removeSchool = require('../controller/admin/removeSchool')
 const removeRepairer = require('../controller/admin/removeRepairer')
+const getCharts = require('../controller/admin/getCharts')
+
 
 module.exports = [{
     prefix: ADMIN_PREFIX,
@@ -65,5 +67,9 @@ module.exports = [{
         controller: removeRepairer,
         method: 'get',
         path: '/removeRepairer'
+    },{
+        controller: getCharts,
+        method: 'get',
+        path: '/getCharts'
     }]
 }]
