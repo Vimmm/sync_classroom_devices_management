@@ -8,24 +8,29 @@ module.exports = async (ctx) => {
     // 5. 赋值返回
     // const school = ctx.query.school
     // const sqlSchool = `select name,location,type,tel,ID,repairer from school`
-    const {ID, name, address, tel, weixin, role, account, password, schools} = ctx.request.body
+    const {ID, name, address, tel, weixin, role, account, passwords, school} = ctx.request.body
     const weixinValue = weixin ? `'${weixin}'` : null
      const sql = `update user set name='${name}', address='${address}', tel='${tel}', weixin=${weixinValue},
-     role=${role}, account='${account}',password='${password}' where ID=${ID}`
+     role=${role}, account='${account}',passwords='${passwords}' where ID=${ID}`
     await exec(sql)
 
-    if(Array.isArray(schools) && schools.length !== 0) {
+    if(Array.isArray(school)) {
         const resetSchoolSql = `update school set repairer=NULL where repairer=${ID}`
-        const updateSchoolSql = `update school set repairer=${ID} where ID in (${schools.join(',')})`
-        await exec(resetSchoolSql) 
-        await exec(updateSchoolSql) 
+        await exec(resetSchoolSql)
+        if (school.length !== 0) {
+            const updateSchoolSql = `update school set repairer=${ID} where ID in (${school.join(',')})`
+            await exec(updateSchoolSql) 
+        }
     }
     const responseDataSql = `select * from user where ID=${ID}`
     const splSchool = `select * from school where repairer=${ID}`
-    ctx.body = await exec(responseDataSql)
-        .then(users => users.map(async user => {
-            user.manaSchools = await exec(splSchool)
+    const [responseData, responseSchool] = await Promise.all([
+        exec(responseDataSql),
+        exec(splSchool)
+    ])
+    ctx.body = responseData.map(user => {
+            user.school = responseSchool
             return user
-        }))
+        })
     
 }
