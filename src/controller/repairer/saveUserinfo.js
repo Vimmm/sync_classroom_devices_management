@@ -16,5 +16,22 @@ module.exports = async (ctx) => {
     const sql = `update user set name='${name}',address='${address}', tel='${tel}', weixin='${weixin}', role=2, account='${account}', passwords='${passwords}' where ID=${ID}`
     await exec(sql)
     const responseDataSql = `select * from user where ID=${ID}`
-    ctx.body = await exec(responseDataSql)
+    const [user] = await exec(responseDataSql)
+
+    const sqlSchool = `select * from school where repairer=${user.ID}`
+    const schools = await exec(sqlSchool)
+
+    if(Array.isArray(schools) && schools.length !== 0) {
+        const schoolsInSql = schools.map(school => school.ID).join(',')
+        const sqlDevices = `select * from devices where school in (${schoolsInSql})`
+        // const statusSql = `select * from repair_records where school in (${schoolsInSql})`
+        const devices = await exec(sqlDevices)
+        
+        user.schools = schools.map(school => {
+            school.devices = devices.filter(device => device.school === school.ID)
+            return school
+        })
+    }
+
+    ctx.body = [user]
 }

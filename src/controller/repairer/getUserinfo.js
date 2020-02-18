@@ -22,10 +22,10 @@ module.exports = async (ctx) => {
         const devices = await exec(sqlDevices)
         
         user.schools = schools.map(school => {
-            school.allDevice = devices.filter(device => device.school === school.ID)
+            school.devices = devices.filter(device => device.school === school.ID)
             return school
         })
     }
 
-    ctx.body = user
+    ctx.body = [user]
 }
