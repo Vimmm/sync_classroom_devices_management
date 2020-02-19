@@ -10,7 +10,6 @@ module.exports = async (ctx) => {
     const account = ctx.state.account
     
     const sqlSchool = `select * from school where account='${account}'`
-    await exec(sqlSchool)
     const sqlDevices = `select * from devices`
     const [schools, devices] = await Promise.all([
         exec(sqlSchool),

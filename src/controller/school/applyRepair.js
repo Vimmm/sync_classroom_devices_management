@@ -17,6 +17,5 @@ module.exports = async (ctx) => {
     const sql = `insert into repair_records (school, device, comment, create_time, status, repairer) 
     values (${school}, ${device}, '${comment}', ${createTimeValue}, ${statusValue}, ${repairer})`
     const data = await exec(sql)
-    const responseDataSql = `select * from repair_records where ID=${data.insertId}`
-    ctx.body = await exec(responseDataSql)
+    ctx.body = !!data.insertId
 }

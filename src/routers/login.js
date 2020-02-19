@@ -6,6 +6,6 @@ module.exports = [{
     routes: [{
         controller: login,
         method: 'post',
-        path: '/login'
+        path: '/common/login'
     }]
 }]
