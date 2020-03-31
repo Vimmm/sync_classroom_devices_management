@@ -1,6 +1,5 @@
 const { ADMIN_PREFIX } = require('../common/constants')
 // const helloword = require('../controller/helloword')
-const login = require('../controller/admin/login')
 
 const getallSchool = require('../controller/admin/getallSchool')
 const addSchool  = require('../controller/admin/addSchool')
@@ -20,10 +19,6 @@ const getCharts = require('../controller/admin/getCharts')
 module.exports = [{
     prefix: ADMIN_PREFIX,
     routes: [{
-        controller: login,
-        method: 'post',
-        path: '/login'
-    },{
         controller: getallSchool,
         method: 'get',
         path: '/getallSchool'

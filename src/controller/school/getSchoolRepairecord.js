@@ -10,8 +10,18 @@ module.exports = async (ctx) => {
     const school = ctx.state.userId
 
     const sqlSchoolrecord = `select * from repair_records where school=${school}`
-    ctx.body = await exec(sqlSchoolrecord)
+    const data = await exec(sqlSchoolrecord)
     
-    // const data = '廖莎'
-    // ctx.body = data
+    if (data.length !== 0) {
+        // (${Array.from(new Set(data)).map(record => record.school).join(',')})
+        const sqlDevice = `select * from devices where ID in (${Array.from(new Set(data)).map(it => it.device).join(',')})`
+        const devices = await exec(sqlDevice)
+        const sqlRepairer = `select * from user where ID in (${Array.from(new Set(data)).map(it => it.repairer).join(',')}) and role="2"`
+        const repairerInfo = await exec(sqlRepairer)
+        ctx.body = data.map(it => {
+            it.deviceInfo = (devices || []).find(d => d.ID === it.device) || {}
+            it.repairerInfo = (repairerInfo || []).find(d => d.ID === it.repairer) || {}
+            return it
+        })
+    } else ctx.body = []
 }

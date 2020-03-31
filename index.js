@@ -4,6 +4,7 @@ const bodyParser = require('koa-bodyparser')
 const RouterMapper = require('./src/core/Router')
 const admin = require('./src/routers/admin')
 const login = require('./src/routers/login')
+const logout = require('./src/routers/logout')
 const school = require('./src/routers/school')
 const repairer = require('./src/routers/repairer')
 const cors = require('@koa/cors')
@@ -16,7 +17,8 @@ const routerMapper = new RouterMapper([
     ...admin,
     ...school,
     ...repairer,
-    ...login
+    ...login,
+    ...logout
 ])
 
 const routers = routerMapper.initRoutes()

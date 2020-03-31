@@ -5,10 +5,13 @@ const repairerRegexp = /^\/api\/repairer.*/
 const adminRegexp = /^\/api\/admin.*/
 
 module.exports = () => async (ctx, next) => {
-    if (ctx.path !== '/api/login') {
+    if (ctx.path !== '/api/common/login' && ctx.path !== '/api/common/logout') {
         const token = ctx.cookies.get('token')
+        if (!token) {
+            ctx.status = 401
+            return ctx.body = '/login'
+        }
         const userInfo = Buffer.from(token, 'base64').toString('utf-8')
-        // console.log(userInfo)
         const [ID, account, identity] = userInfo.split('.')
         // console.log(ID, account, identity)
         let sql

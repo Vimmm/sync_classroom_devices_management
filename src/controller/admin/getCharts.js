@@ -9,5 +9,16 @@ module.exports = async (ctx) => {
     // const sqlCords = `select * from school`
     const sqlRepaircords = `select * from repair_records`
     const data = await exec(sqlRepaircords)
-    ctx.body = data
+
+    if (data.length !== 0) {
+        // (${Array.from(new Set(data)).map(record => record.school).join(',')})
+        const sqlRepairer = `select * from user where ID in (${Array.from(new Set(data)).map(it => it.repairer).join(',')}) and role="2"`
+        const repairerInfo = await exec(sqlRepairer)
+        // console.log(await exec(sqlDevice))
+        // return []
+        ctx.body = data.map(it => {
+            it.repairerInfo = (repairerInfo || []).find(d => d.ID === it.repairer) || {}
+            return it
+        })
+    } else ctx.body = []
 }
