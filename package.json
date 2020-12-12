@@ -6,7 +6,7 @@
   "scripts": {
     "local": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"pm2 start index.js"
+    "start": "pm2 start index.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,9 @@
     "koa-compose": "^4.1.0",
     "koa-helmet": "^5.2.0",
     "koa-router": "^8.0.6",
-    "mysql": "^2.18.1"
+    "koa-static": "^5.0.0",
+    "mysql": "^2.18.1",
+    "pm2": "^4.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
