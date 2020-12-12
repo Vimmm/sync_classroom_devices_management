@@ -46,7 +46,7 @@ koa
         // console.log(template)
         ctx.body = template
     })
-    .listen(3000, () => {
-        console.log('Server Success Listen on 3000 port')
+    .listen(3389, () => {
+        console.log('Server Success Listen on 3389 port')
     })
     
