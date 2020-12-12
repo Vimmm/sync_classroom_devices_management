@@ -5,7 +5,8 @@ const repairerRegexp = /^\/api\/repairer.*/
 const adminRegexp = /^\/api\/admin.*/
 
 module.exports = () => async (ctx, next) => {
-    if (ctx.path !== '/api/common/login' && ctx.path !== '/api/common/logout') {
+    // console.log('auth')
+    if (ctx.path !== '/api/common/login' && ctx.path !== '/api/common/logout' && ctx.path.startsWith('/api')) {
         const token = ctx.cookies.get('token')
         if (!token) {
             ctx.status = 401
